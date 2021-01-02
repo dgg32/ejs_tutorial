@@ -13,17 +13,19 @@
         
         
         <div class="box">
-            <% for(var i=0; i < activity.length; i++) { %>
-            <div class="item">
-                
-                    <input type="checkbox">
-                    <p><%= activity[i] %></p>
-                
-            </div>
-            <% } %>
+            <% activity.forEach(function(x) { %>
+                <form action="/delete" method="post">
+                    <div class="item">
+                    <input type="checkbox" name="checkbox" value="<%= x._id %>" onChange="this.form.submit()">
+                    <p><%= x["name"] %></p>
+                </div>
+                <input type="hidden" name="listName" value="<%= listTitle %>"></input>
+                </form>
+            <% }) %>
+            
             <form class="item" action="/" method="post">
                 <input type="text" id="activity" name="activity" autocomplete="off" placeholder="New item">
-                <button type="submit" name="button" value="Submit">+</button>
+                <button type="submit" name="list" value="<%= listTitle %>">+</button>
               </form> 
             
         </div>
